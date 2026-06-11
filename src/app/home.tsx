@@ -40,35 +40,133 @@ export default function Home() {
 
 
   return (
-    <View style={{flex:1, padding: 20}}>
-      <Text style={{fontSize:24, fontWeight: 'bold', marginBottom: 20}}>Vagas</Text>
-      <TouchableOpacity onPress={()=> router.push("/cadastro")}
-        style={{borderWidth:1, padding:10, marginBottom:10, backgroundColor: '#007bff', borderRadius: 8}}>
+    <View style={styles.container}>
 
-        <Text style={{color: 'white', fontWeight: 'bold'}}>Cadastrar Vagas</Text>
-      </TouchableOpacity>
-      <FlatList
-        data={vagas}
-        keyExtractor={(item)=> item.id}
-        renderItem={({item})=>(
-          <View style={{borderWidth: 1, padding:15, marginBottom:10, borderRadius: 8}}>
-            <Text style={{fontWeight: 'bold', fontSize: 18}}>{item.cargo}</Text>
-            <Text>{item.empresa}</Text>
-            <Text>{item.salario}</Text>
-          </View>
-        )}
-      />
+  <Text style={styles.titulo}>💼 Vagas Disponíveis</Text>
 
-      <TouchableOpacity onPress={logout}
-      style={{
-        backgroundColor:"#ef4444",
-        padding:15,
-        borderRadius:10
-      }}
-      >
-         <Text style={{color:"#fff", textAlign:"center", fontWeight:"bold"}}>Logout</Text>
-      </TouchableOpacity>
-    </View>
+  <TouchableOpacity
+    onPress={() => router.push("/cadastro")}
+    style={styles.botaoCadastrar}
+  >
+    <Text style={styles.textoBotao}>+ Cadastrar Vaga</Text>
+  </TouchableOpacity>
+
+  <FlatList
+    data={vagas}
+    keyExtractor={(item) => item.id}
+    showsVerticalScrollIndicator={false}
+    renderItem={({ item }) => (
+      <View style={styles.card}>
+        <Text style={styles.cargo}>{item.cargo}</Text>
+
+        <Text style={styles.empresa}>
+          🏢 {item.empresa}
+        </Text>
+
+        <Text style={styles.salario}>
+          💰 R$ {item.salario}
+        </Text>
+      </View>
+    )}
+  />
+
+  <TouchableOpacity
+    onPress={logout}
+    style={styles.botaoLogout}
+  >
+    <Text style={styles.textoLogout}>
+      Sair da Conta
+    </Text>
+  </TouchableOpacity>
+
+</View>
   )
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F4F6F8",
+    padding: 20,
+  },
+
+  titulo: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#1E3A8A",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+
+   botaoCadastrar: {
+    backgroundColor: "#2563EB",
+    padding: 15,
+    borderRadius: 14,
+    alignItems: "center",
+    marginBottom: 20,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
+  textoBotao: {
+    color: "#FFF",
+    fontSize: 17,
+    fontWeight: "bold",
+  },
+
+  card: {
+    backgroundColor: "#FFF",
+    padding: 18,
+    borderRadius: 15,
+    marginBottom: 15,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.08,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+
+  cargo: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#111827",
+    marginBottom: 8,
+  },
+
+  empresa: {
+    fontSize: 16,
+    color: "#4B5563",
+    marginBottom: 5,
+  },
+
+  salario: {
+    fontSize: 18,
+    color: "#16A34A",
+    fontWeight: "bold",
+  },
+
+  botaoLogout: {
+    backgroundColor: "#DC2626",
+    padding: 15,
+    borderRadius: 14,
+    alignItems: "center",
+    marginTop: 10,
+  },
+
+  textoLogout: {
+    color: "#FFF",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+});

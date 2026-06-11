@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { router } from "expo-router";
 import { auth } from "@/firebase/firebaseConfing";
 
-
-
 export default function Index() {
     
   useEffect(()=>{
